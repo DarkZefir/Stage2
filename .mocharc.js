@@ -1,4 +1,4 @@
 module.exports = {
-    spec: "tests/TestPage.spec.js",
+    spec: "tests/TestCloudPage.spec.js",
     reporter: "spec",
 };
