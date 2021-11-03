@@ -1,18 +1,9 @@
 const { By } = require('selenium-webdriver');
 
 class PastebinPage {
-    constructor() {
-
-    };
 
     get findTextArea() {
         return (By.xpath("//textarea[@class='textarea -form js-paste-code']"));
-    };
-
-    get writeText() {
-        return (`git config --global user.name  "New Sheriff in Town"
-        git reset $(git commit-tree HEAD^{tree} -m "Legacy code")
-        git push origin master --force`);
     };
 
     get pushHighlightingBtn() {

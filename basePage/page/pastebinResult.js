@@ -1,8 +1,13 @@
 const { By } = require('selenium-webdriver');
 
-class PastebinResult {
+class PastebinResultPage {
     constructor() {
     };
+
+    get showDetails() {
+        return (By.xpath("//div[@class='details']"));
+    };
+
     get highlightingText() {
         return (By.xpath("//a[text()='Bash']"));
     };
@@ -16,4 +21,4 @@ class PastebinResult {
     };
 };
 
-module.exports = PastebinResult;
+module.exports = PastebinResultPage;
