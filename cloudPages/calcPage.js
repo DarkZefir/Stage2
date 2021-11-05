@@ -63,7 +63,7 @@ class CalcPage {
     };
 
     get chooseDataCenter() {
-        return (By.xpath("//md-select-menu[@class='md-overflow']//md-option/div[contains(text(),'Frankfurt (europe-west3)')]"));
+        return By.xpath("//md-select-menu[@class='md-overflow']//div[contains(text(),'Frankfurt')]");
     };
 
     get pushCommitedUsage() {
@@ -87,7 +87,7 @@ class CalcPage {
     };
 
     get pushSendMailBtn() {
-        return (By.xpath("//button[contains(text(),'Send Email')]"));
+        return (By.xpath("//button[@aria-label = 'Send Email']"));
     };
 
     get checkRegion() {

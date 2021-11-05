@@ -6,12 +6,8 @@ class GooglePage {
         return (By.xpath("//input[@name='q']"));
     };
 
-    get openPricingCalc1() {
-        return (By.xpath("//a[@class='gs-title'][contains(text(),'Pricing Calculator')]"));
-    };
-
-    get openPricingCalc2() {
-        return (By.xpath("//div[@class='gsc-thumbnail-inside']//a/b[text()='Google Cloud Platform Pricing Calculator']"));
+    get openPricingCalc() {
+        return (By.xpath("//a/b[text()='Google Cloud Platform Pricing Calculator']"));
     };
 };
 

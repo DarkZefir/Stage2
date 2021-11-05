@@ -1,4 +1,4 @@
-const { Builder, Key, until, } = require('selenium-webdriver');
+const { Builder, Key, until, By, } = require('selenium-webdriver');
 const { expect } = require('chai');
 const { after } = require('mocha');
 
@@ -11,39 +11,44 @@ describe('DefaultTest', async function () {
     const googlePage = new GooglePage();
     const calcPage = new CalcPage();
     const yopmailPage = new YopmailPage();
+    const searchText = 'Google Cloud Platform Pricing Calculator';
+    const numberOfInstances = '4';
+    const windowHandleBasepage = 'https://cloud.google.com/products/calculator#id=c4bd5d3c-2c18-4c54-93d9-b8d7a8753ce5';
+    const windowHandleSecondPage = 'https://yopmail.com/ru/email-generator';
+
     before(async function () {
         await driver.manage().window().maximize();
+        await driver.manage().setTimeouts({ implicit: 10000 });
         await driver.get('https://cloud.google.com/');
         await driver.findElement(googlePage.pushSearchBtn).click();
-        await driver.findElement(googlePage.pushSearchBtn).sendKeys('Google Cloud Platform Pricing Calculator', Key.RETURN);
-        await driver.sleep(5000);
-        await driver.findElement(googlePage.openPricingCalc2).click();
-        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.switchFirstFrame)), 7000);
+        await driver.findElement(googlePage.pushSearchBtn).sendKeys(searchText, Key.RETURN);
+        await driver.findElement(googlePage.openPricingCalc).click();
         await driver.switchTo().frame(await driver.findElement(calcPage.switchFirstFrame));
+        await driver.manage().setTimeouts({ implicit: 0 });
         await driver.switchTo().frame(await driver.findElement(calcPage.switchSecondFrame));
         await driver.findElement(calcPage.pushNumbInstances).click();
-        await driver.findElement(calcPage.pushNumbInstances).sendKeys('4');
+        await driver.findElement(calcPage.pushNumbInstances).sendKeys(numberOfInstances);
         await driver.findElement(calcPage.pushSeries).click();
-        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseSeries)), 2000);
+        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseSeries)));
         await driver.findElement(calcPage.chooseSeries).click();
         await driver.findElement(calcPage.pushMachineType).click();
-        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseMashineType)), 2000);
+        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseMashineType)));
         await driver.findElement(calcPage.chooseMashineType).click();
         await driver.findElement(calcPage.pushAddGPUs).click();
         await driver.findElement(calcPage.pushNumberOfGPUs).click();
-        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseNumberOfGPUs)), 4000);
+        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseNumberOfGPUs)));
         await driver.findElement(calcPage.chooseNumberOfGPUs).click();
         await driver.findElement(calcPage.pushGPuType).click();
-        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseGPuType)), 4000);
+        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseGPuType)));
         await driver.findElement(calcPage.chooseGPuType).click();
         await driver.findElement(calcPage.pushLocalSSD).click();
-        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseLocalSSD)), 4000);
+        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.chooseLocalSSD)));
         await driver.findElement(calcPage.chooseLocalSSD).click();
         await driver.findElement(calcPage.pushDataCenter).click();
-        await driver.sleep(2000);
+        await driver.wait(until.elementIsEnabled(await driver.findElement(calcPage.chooseDataCenter)), 13000);
         await driver.findElement(calcPage.chooseDataCenter).click();
         await driver.findElement(calcPage.pushCommitedUsage).click();
-        await driver.sleep(3000);
+        await driver.wait(until.elementIsEnabled(await driver.findElement(calcPage.chooseCommitedUsage)), 15000);
         await driver.findElement(calcPage.chooseCommitedUsage).click();
         await driver.findElement(calcPage.pushAddBtn).click();
     });
@@ -77,22 +82,20 @@ describe('DefaultTest', async function () {
     it('should total sum the same as in mail', async function () {
         const sum = await driver.findElement(calcPage.checkLastSum).getText();
         await driver.findElement(calcPage.pushEmailBtn).click();
-        await driver.sleep(2000);
-        const originalWindow = await driver.getWindowHandle('https://cloud.google.com/products/calculator#id=c4bd5d3c-2c18-4c54-93d9-b8d7a8753ce5')
-        await driver.switchTo().newWindow('tab')
+        const originalWindow = await driver.getWindowHandle(windowHandleBasepage);
+        await driver.switchTo().newWindow('tab');
         await driver.get('https://yopmail.com/');
-        await driver.wait(until.elementIsVisible(await driver.findElement(yopmailPage.pushRandomMailBtn)), 2000);
+        await driver.wait(until.elementIsVisible(await driver.findElement(yopmailPage.pushRandomMailBtn)));
         await driver.findElement(yopmailPage.pushRandomMailBtn).click();
         await driver.findElement(yopmailPage.pushCopyBtn).click();
-        const newWindow = await driver.getWindowHandle('https://yopmail.com/ru/email-generator');
+        const newWindow = await driver.getWindowHandle(windowHandleSecondPage);
         await driver.switchTo().window(originalWindow);
         await driver.switchTo().frame(await driver.findElement(calcPage.switchFirstFrame));
         await driver.switchTo().frame(await driver.findElement(calcPage.switchSecondFrame));
         await driver.findElement(calcPage.pushMailString).sendKeys(Key.CONTROL + 'V');
-        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.pushSendMailBtn)), 2000);
+        await driver.wait(until.elementIsVisible(await driver.findElement(calcPage.pushSendMailBtn)));
         await driver.findElement(calcPage.pushSendMailBtn).click();
         await driver.switchTo().window(newWindow);
-        await driver.sleep(3000);
         await driver.findElement(yopmailPage.checkMailBtn).click();
         await driver.switchTo().frame(await driver.findElement(yopmailPage.switchMailFrame));
         const sumMail = await driver.findElement(yopmailPage.checkSumMail).getText();

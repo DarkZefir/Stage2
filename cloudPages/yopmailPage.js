@@ -3,7 +3,7 @@ const { By } = require('selenium-webdriver');
 class YopmailPage {
 
     get pushRandomMailBtn() {
-        return (By.xpath("//a[@title='Генератор Одноразовых адресов электронной почты создаёт новый адрес для вас за один клик!']"));
+        return (By.xpath("//div[@id='listeliens']/a[1]"));
     };
 
     get pushCopyBtn() {
@@ -11,7 +11,7 @@ class YopmailPage {
     };
 
     get checkMailBtn() {
-        return (By.xpath("//span[text()='Проверить почту']"));
+        return (By.xpath("//div[@class='nw']/button[last()]"));
     };
 
     get switchMailFrame() {
@@ -20,6 +20,10 @@ class YopmailPage {
 
     get checkSumMail() {
         return (By.xpath("//h3[contains(text(),'USD')]"));
+    };
+
+    get waitMail() {
+        return (By.xpath("//div[@class= 'm']"));
     };
 };
 
