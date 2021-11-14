@@ -113,10 +113,10 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 15000,
+    connectionRetryTimeout: 120000,
     //
     // Default request retries count
-    connectionRetryCount: 1,
+    connectionRetryCount: 3,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
@@ -246,6 +246,7 @@ exports.config = {
     afterTest: function (test, context, { error, result, duration, passed, retries }) {
         if (error) {
             browser.takeScreenshot();
+            browser.saveScreenshot('./Screenshots/screenshot.png');
         }
 
     },
