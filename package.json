@@ -6,7 +6,7 @@
 	"scripts": {
 		"test": "mocha --timeout 90000",
 		"wdio": "wdio run wdio.conf.js",
-		"smoke": "wdio run wdio.conf.js --suite smoke"
+		"jj": "wdio run wdio.conf.js --suite smoke"
 	},
 	"keywords": [],
 	"author": "",

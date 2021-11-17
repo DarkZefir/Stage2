@@ -26,10 +26,10 @@ describe('My Login application', () => {
         await CalcPage.pushMachineType.click();
         await clickAndWait(CalcPage.chooseMashineType, defaultTime);
         await CalcPage.pushAddGPUs.click();
-        await CalcPage.pushNumberOfGPUs.click();
-        await clickAndWait(CalcPage.chooseNumberOfGPUs, defaultTime);
         await CalcPage.pushGPuType.click();
         await clickAndWait(CalcPage.chooseGPuType, defaultTime);
+        await CalcPage.pushNumberOfGPUs.click();
+        await clickAndWait(CalcPage.chooseNumberOfGPUs, defaultTime);
         await CalcPage.pushLocalSSD.click();
         await clickAndWait(CalcPage.chooseLocalSSD, defaultTime);
         await CalcPage.pushDataCenter.click();

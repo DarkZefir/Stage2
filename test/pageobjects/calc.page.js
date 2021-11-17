@@ -23,7 +23,7 @@ class CalcPage extends Page {
     };
 
     get pushMachineType() {
-        return $("//md-select[@placeholder='Instance type']/md-select-value[@class='md-select-value']");
+        return $("//md-select[@placeholder='Series']/md-select-value[@class='md-select-value']");
     };
 
     get chooseMashineType() {
@@ -31,11 +31,11 @@ class CalcPage extends Page {
     };
 
     get pushAddGPUs() {
-        return $("//div[@class='ng-scope layout-row']//md-checkbox[@aria-label='Add GPUs']/div[@class='md-container md-ink-ripple']");
+        return $("//form[@class='ng-scope ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-valid ng-valid-required ng-valid-parse']//md-checkbox[@aria-label='Add GPUs']/div[@class='md-container md-ink-ripple']");
     };
 
     get pushNumberOfGPUs() {
-        return $("//md-select[@placeholder='Number of GPUs']/md-select-value");
+        return $("//md-select[@placeholder='Number of GPUs']/md-select-value/span[1]");
     };
 
     get chooseNumberOfGPUs() {
@@ -43,11 +43,11 @@ class CalcPage extends Page {
     };
 
     get pushGPuType() {
-        return $("//md-select[@placeholder='GPU type']/md-select-value");
+        return $("//md-select[@placeholder='GPU type']");
     };
 
     get chooseGPuType() {
-        return $("//md-option[@value='NVIDIA_TESLA_V100']");
+        return $("//md-option[@value='NVIDIA_TESLA_V100']/div");
     };
 
     get pushLocalSSD() {

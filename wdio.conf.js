@@ -27,6 +27,8 @@ exports.config = {
         smoke: [
             './test/smokeTests/TestPage.e2e.js'
         ],
+        cloudTest: ['./test/specs/TestCloudWdio.e2e.js'
+        ],
     },
     // Patterns to exclude.
     exclude: [
@@ -113,10 +115,10 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 70000,
     //
     // Default request retries count
-    connectionRetryCount: 3,
+    connectionRetryCount: 2,
     //
     // Test runner services
     // Services take over a specific job you don't want to take care of. They enhance
@@ -155,7 +157,7 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 90000
+        timeout: 200000
     },
     //
     // =====
