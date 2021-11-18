@@ -23,7 +23,7 @@ class CalcPage extends Page {
     };
 
     get pushMachineType() {
-        return $("//md-select[@placeholder='Series']/md-select-value[@class='md-select-value']");
+        return $("//md-select[@placeholder='Instance type']/md-select-value[@class='md-select-value']");
     };
 
     get chooseMashineType() {

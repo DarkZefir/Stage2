@@ -27,7 +27,7 @@ exports.config = {
         smoke: [
             './test/smokeTests/TestPage.e2e.js'
         ],
-        cloudTest: ['./test/specs/TestCloudWdio.e2e.js'
+        cloudtest: ['./test/specs/TestCloudWdio.e2e.js'
         ],
     },
     // Patterns to exclude.
@@ -111,11 +111,11 @@ exports.config = {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 90000,
+    waitforTimeout: 140000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 70000,
+    connectionRetryTimeout: 60000,
     //
     // Default request retries count
     connectionRetryCount: 2,
