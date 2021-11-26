@@ -6,8 +6,10 @@
 	"scripts": {
 		"test": "mocha --timeout 90000",
 		"wdio": "wdio run wdio.conf.js",
+		"chrome": "npx cross-env ENV=chrome wdio",
 		"smoke": "wdio run wdio.conf.js --suite smoke",
-		"cloudtest": "wdio run wdio.conf.js --suite cloudtest"
+		"cloudtest": "wdio run wdio.conf.js --suite cloudtest",
+		"firefox": "npx cross-env ENV=firefox wdio"
 	},
 	"keywords": [],
 	"author": "",
@@ -22,7 +24,14 @@
 		"@wdio/spec-reporter": "^7.16.3",
 		"chai": "^4.3.4",
 		"chromedriver": "^95.0.0",
+		"cross-env": "^7.0.3",
+		"geckodriver": "^2.0.4",
 		"mocha": "^9.1.3",
 		"wdio-chromedriver-service": "^7.2.2"
+	},
+	"dependencies": {
+		"-": "0.0.1",
+		"@playwright/test": "^1.16.3",
+		"yargs": "^17.2.1"
 	}
 }
