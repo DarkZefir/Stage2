@@ -1,7 +1,8 @@
 const Page = require('./page');
+const Factory = require('../buisnessPatterns/factory')
 
+class CalcPage extends Factory {
 
-class CalcPage extends Page {
     get switchFirstFrame() {
         return ("//article[@id='cloud-site']//iframe");
     };
@@ -11,7 +12,7 @@ class CalcPage extends Page {
     };
 
     get pushNumbInstances() {
-        return $("//input[@id='input_74']");
+        return $("//input[@id='input_75']");
     };
 
     get pushSeries() {
@@ -19,7 +20,7 @@ class CalcPage extends Page {
     };
 
     get chooseSeries() {
-        return $("//md-option[@value='n1']");
+        return $(this.series);
     };
 
     get pushMachineType() {
@@ -27,7 +28,7 @@ class CalcPage extends Page {
     };
 
     get chooseMashineType() {
-        return $("//md-option[@value='CP-COMPUTEENGINE-VMIMAGE-N1-STANDARD-8']");
+        return $(this.mashineType);
     };
 
     get pushAddGPUs() {
@@ -39,7 +40,7 @@ class CalcPage extends Page {
     };
 
     get chooseNumberOfGPUs() {
-        return $("//md-option[@ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]']//div[contains(text(),'1')]");
+        return $(this.numberOfGPUs);
     };
 
     get pushGPuType() {
@@ -47,7 +48,7 @@ class CalcPage extends Page {
     };
 
     get chooseGPuType() {
-        return $("//md-option[@value='NVIDIA_TESLA_V100']/div");
+        return $(this.gpuType);
     };
 
     get pushLocalSSD() {
@@ -55,7 +56,7 @@ class CalcPage extends Page {
     };
 
     get chooseLocalSSD() {
-        return $("//div[contains(text(),'2x375 GB')]");
+        return $(this.localSSD);
     };
 
     get pushDataCenter() {
@@ -63,7 +64,7 @@ class CalcPage extends Page {
     };
 
     get chooseDataCenter() {
-        return $("//md-select-menu[@class='md-overflow']//div[contains(text(),'Frankfurt')]");
+        return $(this.dataCenter);
     };
 
     get pushCommitedUsage() {
@@ -71,7 +72,7 @@ class CalcPage extends Page {
     };
 
     get chooseCommitedUsage() {
-        return $("//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(),'1 Year')]");
+        return $(this.commitedUsage);
     };
 
     get pushAddBtn() {

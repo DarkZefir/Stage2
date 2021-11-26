@@ -1,3 +1,7 @@
+const opts = require('./test/pageobjects/yargsArr')
+const argv = require('yargs').argv;
+const brows = require('./browserModules');
+const ENV = process.env.ENV;
 exports.config = {
     //
     // ====================
@@ -58,24 +62,23 @@ exports.config = {
     //
     capabilities: [
         {
-
             // maxInstances can get overwritten per capability. So if you have an in-house Selenium
             // grid with only 5 firefox instances available you can make sure that not more than
             // 5 instances get started at a time.
             maxInstances: 5,
             //
-            browserName: 'firefox',
+            browserName: brows[process.env.ENV],
             acceptInsecureCerts: true
             // If outputDir is provided WebdriverIO can capture driver session logs
             // it is possible to configure which logTypes to include/exclude.
             // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
             // excludeDriverLogs: ['bugreport', 'server'],
         },
-        {
-            maxInstances: 5,
-            browserName: 'chrome',
-            acceptInsecureCerts: true
-        }
+        //{
+        //     maxInstances: 1,
+        //   browserName: 'chrome',
+        //    acceptInsecureCerts: true
+        //}
     ],
     //
     // ===================
@@ -111,11 +114,11 @@ exports.config = {
     baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 140000,
+    waitforTimeout: 40000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 60000,
+    connectionRetryTimeout: 50000,
     //
     // Default request retries count
     connectionRetryCount: 2,
@@ -246,9 +249,24 @@ exports.config = {
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
     afterTest: function (test, context, { error, result, duration, passed, retries }) {
+
+        function addZero(a) {
+            return (a < 10) ? ('0' + a) : a;
+        };
+
+        function getTime(t = new Date()) {
+            const Y = t.getFullYear();
+            const M = addZero(t.getMonth() + 1);
+            const D = t.getDate();
+            const h = addZero(t.getHours());
+            const m = addZero(t.getMinutes());
+
+            return `${Y}-${M}-${D}_${h}-${m}`
+        }
         if (error) {
             browser.takeScreenshot();
-            browser.saveScreenshot('./Screenshots/screenshot.png');
+            browser.saveScreenshot(`./Screenshots/${getTime()}.png`);
+
         }
 
     },

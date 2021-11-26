@@ -3,13 +3,13 @@ const { expect } = require('chai');
 const GooglePage = require('../pageobjects/google.page');
 const CalcPage = require('../pageobjects/calc.page');
 const YopmailPage = require('../pageobjects/yopmail.page');
-const { clickAndWait } = require('../pageobjects/calc.page');
+const { clickAndWait, numberOfInstances } = require('../pageobjects/calc.page');
 const { mailRefresh } = require('../pageobjects/yopmail.page');
 
 describe('My Login application', () => {
     const searchText = 'Google Cloud Platform Pricing Calculator';
-    const numberOfInstances = '4';
     const defaultTime = { timeout: 3000 };
+    const numberOfInstances = '4';
 
     before(async function () {
         await GooglePage.open();
@@ -20,7 +20,7 @@ describe('My Login application', () => {
         await browser.switchToFrame(await browser.$(CalcPage.switchFirstFrame));
         await browser.switchToFrame(await browser.$(CalcPage.switchSecondFrame));
         await CalcPage.pushNumbInstances.click();
-        await CalcPage.pushNumbInstances.keys(numberOfInstances);
+        await CalcPage.pushNumbInstances.addValue(numberOfInstances);
         await CalcPage.pushSeries.click();
         await clickAndWait(CalcPage.chooseSeries, defaultTime);
         await CalcPage.pushMachineType.click();
