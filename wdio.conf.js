@@ -1,5 +1,3 @@
-const opts = require('./test/pageobjects/yargsArr')
-const argv = require('yargs').argv;
 const brows = require('./browserModules');
 const ENV = process.env.ENV;
 exports.config = {
