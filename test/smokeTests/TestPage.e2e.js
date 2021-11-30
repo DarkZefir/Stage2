@@ -1,4 +1,5 @@
 const { expect } = require('chai');
+const { browser } = require('../../yargsArr');
 
 const PastebinPage = require('../pageobjects/Pastebin.page');
 const PastebinResultPage = require('../pageobjects/Result.page');
