@@ -60,7 +60,7 @@ describe('My Login application', () => {
     });
     it('should total sum be like in manual test', async function () {
         const sum = await CalcPage.checkLastSum.getText();
-        expect(sum).to.be.include('Total Estimated Cost: USD 1,084.69 per 1 month');
+        expect(sum).to.be.include('Total Estimated Cost: USD 1,288.71 per 1 month');
     });
     it('should total sum the same as in mail', async function () {
         const sum = await CalcPage.checkLastSum.getText();

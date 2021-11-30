@@ -9,9 +9,12 @@
 		"chrome": "npx cross-env ENV=chrome wdio",
 		"smoke": "wdio run wdio.conf.js --suite smoke",
 		"cloudtest": "wdio run wdio.conf.js --suite cloudtest",
-		"firefox": "npx cross-env ENV=firefox wdio"
+		"firefox": "npx cross-env ENV=firefox wdio",
+		"dev": "concurrently \"npm run chrome\" \"npm run smoke\""
 	},
-	"keywords": [],
+	"keywords": [
+		"chrome"
+	],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
@@ -24,6 +27,7 @@
 		"@wdio/spec-reporter": "^7.16.3",
 		"chai": "^4.3.4",
 		"chromedriver": "^95.0.0",
+		"concurrently": "^6.4.0",
 		"cross-env": "^7.0.3",
 		"geckodriver": "^2.0.4",
 		"mocha": "^9.1.3",
