@@ -60,7 +60,7 @@ describe('My Login application', () => {
     });
     it('should total sum be like in manual test', async function () {
         const sum = await CalcPage.checkLastSum.getText();
-        expect(sum).to.be.include('Estimated Component Cost: USD 1,082.77 per 1 month');
+        expect(sum).to.be.include('USD 1,082.77');
     });
     it('should total sum the same as in mail', async function () {
         const sum = await CalcPage.checkLastSum.getText();
@@ -78,7 +78,7 @@ describe('My Login application', () => {
         await clickAndWait(CalcPage.pushSendMailBtn, defaultTime);
         await browser.switchToWindow(handles[1]);
         await YopmailPage.checkMailBtn.click();
-        await mailRefresh(5000);
+        await YopmailPage.pushMailRefreshBtn.click();
         await browser.switchToFrame(await browser.$(YopmailPage.switchMailFrame));
         const sumMail = await YopmailPage.checkSumMail.getText();
         expect(sum).to.be.include(sumMail);
