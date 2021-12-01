@@ -6,15 +6,10 @@
 	"scripts": {
 		"test": "mocha --timeout 90000",
 		"wdio": "wdio run wdio.conf.js",
-		"chrome": "npx cross-env ENV=chrome wdio",
-		"smoke": "wdio run wdio.conf.js --suite smoke",
-		"cloudtest": "wdio run wdio.conf.js --suite cloudtest",
-		"firefox": "npx cross-env ENV=firefox wdio",
-		"dev": "concurrently \"npm run chrome\" \"npm run smoke\""
+		"chrome": "npx cross-env ENV=chrome wdio --suite",
+		"firefox": "npx cross-env ENV=firefox wdio --suite"
 	},
-	"keywords": [
-		"chrome"
-	],
+	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {

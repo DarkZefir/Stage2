@@ -35,7 +35,7 @@ exports.config = {
         cloudtest: ['./test/specs/TestCloudWdio.e2e.js'
         ],
     },
-    // Patterns to exclude.
+    //Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
     ],

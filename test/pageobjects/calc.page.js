@@ -112,7 +112,7 @@ class CalcPage extends Factory {
     };
 
     get checkLastSum() {
-        return $("//b[contains(text(),'USD 1,288.71')]");
+        return $("//b[contains(text(),'USD 1,082.77')]");
     };
 
     async clickAndWait(element, timeout) {
