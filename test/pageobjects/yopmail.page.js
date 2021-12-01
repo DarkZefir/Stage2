@@ -30,6 +30,17 @@ class YopmailPage extends Page {
         return $("//button[@id='refresh']")
     };
 
+    async mailRefresh(timeout) {
+        await browser.refresh();
+        await browser.refresh();
+        await browser.setTimeout({
+            'pageLoad': timeout,
+            'script': timeout
+        });
+        await browser.refresh();
+        await browser.refresh();
+    };
+
     async clickAndWait(element, timeout) {
         await element.waitForClickable({ timeout });
         await element.click();

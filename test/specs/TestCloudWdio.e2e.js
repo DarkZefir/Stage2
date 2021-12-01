@@ -77,6 +77,7 @@ describe('My Login application', () => {
         await CalcPage.pushMailString.keys(['Shift', 'Insert']);
         await clickAndWait(CalcPage.pushSendMailBtn, defaultTime);
         await browser.switchToWindow(handles[1]);
+        await YopmailPage.mailRefresh(4000);
         await YopmailPage.checkMailBtn.click();
         await YopmailPage.pushMailRefreshBtn.click();
         await browser.switchToFrame(await browser.$(YopmailPage.switchMailFrame));
