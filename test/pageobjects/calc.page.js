@@ -1,7 +1,7 @@
 const Page = require('./page');
-const Factory = require('../buisnessPatterns/factory')
+const CalcFactory = require('../buisnessPatterns/factory')
 
-class CalcPage extends Factory {
+class CalcPage {
 
     get switchFirstFrame() {
         return ("//article[@id='cloud-site']//iframe");
@@ -19,16 +19,21 @@ class CalcPage extends Factory {
         return $("//md-select[@name='series']/md-select-value[@class='md-select-value']");
     };
 
-    get chooseSeries() {
-        return $(this.series);
+    async chooseSeries(series, timeout) {
+        const locator = `//md-option[@value='${series}']`;
+        await $(locator).waitForClickable({ timeout });
+        await $(locator).click();
+
     };
 
     get pushMachineType() {
         return $("//md-select[@placeholder='Instance type']/md-select-value[@class='md-select-value']");
     };
 
-    get chooseMashineType() {
-        return $(this.mashineType);
+    async chooseMashineType(mashineType, timeout) {
+        const locator = `//md-option[@value='${mashineType}']`
+        await $(locator).waitForClickable({ timeout });
+        await $(locator).click();
     };
 
     get pushAddGPUs() {
@@ -39,40 +44,51 @@ class CalcPage extends Factory {
         return $("//md-select[@placeholder='Number of GPUs']/md-select-value/span[1]");
     };
 
-    get chooseNumberOfGPUs() {
-        return $(this.numberOfGPUs);
+    async chooseNumberOfGPUs(numberOfGPUs, timeout) {
+        const locator = `//md-option[@ng-repeat='item in listingCtrl.supportedGpuNumbers[listingCtrl.computeServer.gpuType]']//div[contains(text(),'${numberOfGPUs}')]`
+        await $(locator).waitForClickable({ timeout });
+        await $(locator).click();
     };
 
     get pushGPuType() {
         return $("//md-select[@placeholder='GPU type']");
     };
 
-    get chooseGPuType() {
-        return $(this.gpuType);
+    async chooseGPuType(gpuType, timeout) {
+        const locator = `//md-option[@value='${gpuType}']/div`
+        await $(locator).waitForClickable({ timeout });
+        await $(locator).click();
     };
 
     get pushLocalSSD() {
         return $("//md-select[@placeholder='Local SSD']/md-select-value//div[@class='md-text ng-binding']");
     };
 
-    get chooseLocalSSD() {
-        return $(this.localSSD);
+    async chooseLocalSSD(localSSD, timeout) {
+        const locator = `//div[contains(text(),'${localSSD}')]`
+        await $(locator).waitForClickable({ timeout });
+        await $(locator).click();
     };
 
     get pushDataCenter() {
         return $("//md-select[@placeholder='Datacenter location']/md-select-value//div[@class='md-text ng-binding']");
     };
 
-    get chooseDataCenter() {
-        return $(this.dataCenter);
+    async chooseDataCenter(dataCenter, timeout) {
+        const locator = `//md-select-menu[@class='md-overflow']//div[contains(text(),'${dataCenter}')]`
+        await $(locator).waitForClickable({ timeout });
+        await $(locator).click();
     };
+
 
     get pushCommitedUsage() {
         return $("//md-select-value//div[text()='None']");
     };
 
-    get chooseCommitedUsage() {
-        return $(this.commitedUsage);
+    async chooseCommitedUsage(commitedUsage, timeout) {
+        const locator = `//div[@class='md-select-menu-container md-active md-clickable']//div[contains(text(),'${commitedUsage}')]`
+        await $(locator).waitForClickable({ timeout });
+        await $(locator).click();
     };
 
     get pushAddBtn() {
@@ -118,7 +134,7 @@ class CalcPage extends Factory {
     async clickAndWait(element, timeout) {
         await element.waitForClickable({ timeout });
         await element.click();
-    }
+    };
 };
 
 

@@ -2,14 +2,16 @@ const { expect } = require('chai');
 
 const GooglePage = require('../pageobjects/google.page');
 const CalcPage = require('../pageobjects/calc.page');
+const { clickAndWait } = require('../pageobjects/calc.page')
 const YopmailPage = require('../pageobjects/yopmail.page');
-const { clickAndWait, numberOfInstances } = require('../pageobjects/calc.page');
-const { mailRefresh } = require('../pageobjects/yopmail.page');
+const CalcFactory = require('../buisnessPatterns/factory');
 
 describe('My Login application', () => {
     const searchText = 'Google Cloud Platform Pricing Calculator';
     const defaultTime = { timeout: 3000 };
     const numberOfInstances = '4';
+    const GoogleCalcModel = CalcFactory.getDefaultCalc();
+
 
     before(async function () {
         await GooglePage.open();
@@ -22,20 +24,20 @@ describe('My Login application', () => {
         await CalcPage.pushNumbInstances.click();
         await CalcPage.pushNumbInstances.addValue(numberOfInstances);
         await CalcPage.pushSeries.click();
-        await clickAndWait(CalcPage.chooseSeries, defaultTime);
+        await CalcPage.chooseSeries((GoogleCalcModel.series), defaultTime);
         await CalcPage.pushMachineType.click();
-        await clickAndWait(CalcPage.chooseMashineType, defaultTime);
+        await CalcPage.chooseMashineType((GoogleCalcModel.mashineType), defaultTime);
         await CalcPage.pushAddGPUs.click();
         await CalcPage.pushGPuType.click();
-        await clickAndWait(CalcPage.chooseGPuType, defaultTime);
+        await CalcPage.chooseGPuType((GoogleCalcModel.gpuType), defaultTime);
         await CalcPage.pushNumberOfGPUs.click();
-        await clickAndWait(CalcPage.chooseNumberOfGPUs, defaultTime);
+        await CalcPage.chooseNumberOfGPUs((GoogleCalcModel.numberOfGPUs), defaultTime);
         await CalcPage.pushLocalSSD.click();
-        await clickAndWait(CalcPage.chooseLocalSSD, defaultTime);
+        await CalcPage.chooseLocalSSD((GoogleCalcModel.localSSD), defaultTime);
         await CalcPage.pushDataCenter.click();
-        await clickAndWait(CalcPage.chooseDataCenter, defaultTime);
+        await CalcPage.chooseDataCenter((GoogleCalcModel.dataCenter), defaultTime);
         await CalcPage.pushCommitedUsage.click();
-        await clickAndWait(CalcPage.chooseCommitedUsage, defaultTime);
+        await CalcPage.chooseCommitedUsage((GoogleCalcModel.commitedUsage), defaultTime);
         await CalcPage.pushAddBtn.click();
     });
     it('should region be Frankfurt', async function () {
